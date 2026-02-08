@@ -1,0 +1,51 @@
+// CODE GOOGLE APPS SCRIPT
+// À copier dans Google Sheets → Extensions → Apps Script
+
+function doPost(e) {
+try {
+// Ouvre la feuille Google Sheets
+const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+```
+// Si c'est la première ligne, ajoute les en-têtes
+if (sheet.getLastRow() === 0) {
+  sheet.appendRow(['Date/Heure', 'Nom', 'Filière', 'Destinataire', 'Devinette']);
+  // Formatage de l'en-tête
+  const headerRange = sheet.getRange(1, 1, 1, 5);
+  headerRange.setFontWeight('bold');
+  headerRange.setBackground('#ff6b9d');
+  headerRange.setFontColor('#ffffff');
+}
+
+// Récupère les données du formulaire
+const timestamp = e.parameter.timestamp;
+const nom = e.parameter.nom;
+const filiere = e.parameter.filiere;
+const destinataire = e.parameter.destinataire;
+const devinette = e.parameter.devinette;
+
+// Ajoute une nouvelle ligne avec les données
+sheet.appendRow([timestamp, nom, filiere, destinataire, devinette]);
+
+// Auto-ajuste la largeur des colonnes
+sheet.autoResizeColumns(1, 5);
+
+// Retourne un succès
+return ContentService
+  .createTextOutput(JSON.stringify({ result: 'success' }))
+  .setMimeType(ContentService.MimeType.JSON);
+```
+
+} catch (error) {
+// En cas d’erreur
+return ContentService
+.createTextOutput(JSON.stringify({ result: ‘error’, message: error.toString() }))
+.setMimeType(ContentService.MimeType.JSON);
+}
+}
+
+function doGet(e) {
+return ContentService
+.createTextOutput(JSON.stringify({ status: ‘API Cupidon Shoot active’ }))
+.setMimeType(ContentService.MimeType.JSON);
+}
