@@ -463,41 +463,7 @@ N’oublie pas d’inclure :
     </div>
   
     <script>
-                    function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-
-  const nom = e.parameter.nom;
-  const filiere = e.parameter.filiere;
-  const destinataire = e.parameter.destinataire;
-  const devinette = e.parameter.devinette;
-  const date = e.parameter.date;
-
-  sheet.appendRow([date, nom, filiere, destinataire, devinette]);
-
-  // 📩 EMAIL AUTOMATIQUE
-  const emailBDE = "tonemail@gmail.com"; // 🔴 À MODIFIER
-
-  const sujet = "💘 Nouvelle devinette Cupidon Shoot";
-  const message = `
-Une nouvelle devinette a été envoyée 💌
-
-👤 Expéditeur : ${nom}
-🎓 Filière : ${filiere}
-💝 Destinataire : ${destinataire}
-
-📝 Message :
-${devinette}
-
-📅 Date : ${date}
-`;
-
-  MailApp.sendEmail(emailBDE, sujet, message);
-
-  return ContentService
-    .createTextOutput(JSON.stringify({result:"success"}))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-        // ⚠️ IMPORTANT : Remplace cette URL par ton URL Google Apps Script
+                    // ⚠️ IMPORTANT : Remplace cette URL par ton URL Google Apps Script
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYirwpowOLc_P90Jh2liMfEvSgMvlcf0BQlPjEsmdsLt-RjqHTAi1N3Wdf0_T2KrGX/exec
 ';
   
@@ -560,6 +526,7 @@ ${devinette}
 
 </body>
 </html>
+
 
 
 
